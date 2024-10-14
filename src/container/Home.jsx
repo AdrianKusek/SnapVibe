@@ -63,12 +63,13 @@ const Home = () => {
                 }}
         />
         <Link to={'/'}>
-                <img src={logo} alt='logo' className='w-34'/>
+                <img src={logo} alt='logo' className='w-24'/>
         </Link>
-        <Link to={`user-profile/${user?.id}`}>
-                <img src={user?.image} alt='logo' className='w-12'/>
+        {user && (<Link to={`user-profile/${user?.id}`}>
+                <img src={user?.image} alt='user' className='w-12'/>
                 {user?.name}
-        </Link>
+        </Link>)}
+        
 
         </div>
        
