@@ -50,13 +50,18 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const navigate = useNavigate();
 
   const handleTouchStart = () => {
-    setPostHovered(!postHovered);
+    setPostHovered(true);
   };
 
   const handleTouchEnd = () => {
     setTimeout(() => {
       setPostHovered(false);
-    }, 3000); // 1 second delay
+    }, 3000); // 3 second delay
+  };
+
+  const handleButtonClick = (e, action) => {
+    e.stopPropagation();
+    action();
   };
 
   return (
@@ -80,7 +85,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 <a
                   href={`${image?.asset?.url}?dl=`}
                   download
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => handleButtonClick(e, () => {})}
                   className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none'
                 >
                   <MdDownloadForOffline />
@@ -94,10 +99,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 <button
                   type='button'
                   className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    savePin(_id);
-                  }}
+                  onClick={(e) => handleButtonClick(e, () => savePin(_id))}
                 >
                   Save
                 </button>
@@ -110,7 +112,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   target='_blank'
                   rel='noreferrer'
                   className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md'
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => handleButtonClick(e, () => {})}
                 >
                   <BsFillArrowUpRightCircleFill />
                   {extractDomain(destination)}
@@ -120,10 +122,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 <button
                   type='button'
                   className='bg-white p-2 opacity-70 hover:opacity-100 font-bold text-dark text-base rounded-3xl hover:shadow-md outline-none'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deletePin(_id);
-                  }}
+                  onClick={(e) => handleButtonClick(e, () => deletePin(_id))}
                 >
                   <AiTwotoneDelete />
                 </button>
