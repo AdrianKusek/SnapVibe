@@ -65,7 +65,8 @@ const Home = () => {
         <Link to={'/'}>
                 <img src={logo} alt='logo' className='w-24'/>
         </Link>
-        {user && (<Link to={`user-profile/${user?.id}`}>
+        {console.log('user tutaj',user)}
+        {user && (<Link to={`user-profile/${user?._id}`}>
                 <img src={user?.image} alt='user' className='w-12'/>
                 {user?.name}
         </Link>)}
