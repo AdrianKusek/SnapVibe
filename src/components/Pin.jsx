@@ -50,7 +50,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const navigate = useNavigate();
 
   const handleTouchStart = () => {
-    setPostHovered(true);
+    setPostHovered(!postHovered);
   };
 
   const handleTouchEnd = () => {
@@ -63,7 +63,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
         onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        // onTouchEnd={handleTouchEnd}
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className='relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out'
       >
