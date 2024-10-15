@@ -56,7 +56,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const handleTouchEnd = () => {
     setTimeout(() => {
       setPostHovered(false);
-    }, 1000); // 1 second delay
+    }, 3000); // 1 second delay
   };
 
   return (
