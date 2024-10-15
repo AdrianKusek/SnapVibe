@@ -88,8 +88,11 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
               <div className="flex gap-2">
                 <a
                   href={`${image?.asset?.url}?dl=`}
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                   
+                  }}
                   download
-                  onClick={(e) => handleButtonClick(e, () => {})}
                   className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none'
                 >
                   <MdDownloadForOffline />
@@ -117,10 +120,13 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
               {destination && (
                 <a
                   href={destination.startsWith('http') ? destination : `http://${destination}`}
+                  onClick={(e) => {
+                    e.stopPropagation(); 
+                   
+                  }}
                   target='_blank'
                   rel='noreferrer'
                   className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md'
-                  onClick={(e) => handleButtonClick(e, () => {})}
                 >
                   <BsFillArrowUpRightCircleFill />
                   {extractDomain(destination)}
