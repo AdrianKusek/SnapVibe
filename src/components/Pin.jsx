@@ -56,10 +56,15 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const handleTouchEnd = () => {
     setTimeout(() => {
       setPostHovered(false);
-    }, 3000); // 3 second delay
+    }, 1000); // 1 second delay
   };
 
   const handleButtonClick = (e, action) => {
+    e.stopPropagation();
+    action();
+  };
+
+  const handleTouchStartButton = (e, action) => {
     e.stopPropagation();
     action();
   };
@@ -100,7 +105,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   type='button'
                   className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none'
                   onClick={(e) => handleButtonClick(e, () => savePin(_id))}
-                  onTouchStart={(e) => handleButtonClick(e, () => savePin(_id))}
+                  onTouchStart={(e) => handleTouchStartButton(e, () => savePin(_id))}
                 >
                   Save
                 </button>
