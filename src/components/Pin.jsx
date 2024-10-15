@@ -8,13 +8,12 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 import { fetchUser } from '../utils/fetchUser';
 
 const user = fetchUser();
-console.log(user, 'user');
 
 const extractDomain = (url) => {
-    const match = url.match(/^(https?:\/\/)?(www\.)?([^\/]+)/);
-    const domain = match ? match[3] : url;
-    return domain.length > 8 ? `${domain.slice(0, 8)}...` : domain;
-  };
+  const match = url.match(/^(https?:\/\/)?(www\.)?([^\/]+)/);
+  const domain = match ? match[3] : url;
+  return domain.length > 8 ? `${domain.slice(0, 8)}...` : domain;
+};
 
 const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const alreadySaved = !!save?.filter((item) => item.postedBy._id === user?.sub).length;
@@ -37,27 +36,34 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           window.location.reload();
         });
     }
-   
   };
 
   const deletePin = (id) => {
-    
     client
       .delete(id)
       .then(() => {
         window.location.reload();
       });
-    
   };
 
   const [postHovered, setPostHovered] = useState(false);
   const navigate = useNavigate();
+
+  const handleTouchStart = () => {
+    setPostHovered(true);
+  };
+
+  const handleTouchEnd = () => {
+    setPostHovered(false);
+  };
 
   return (
     <div className='m-2'>
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className='relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out'
       >
@@ -78,7 +84,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   <MdDownloadForOffline />
                 </a>
               </div>
-              {(alreadySaved ) ? (
+              {(alreadySaved) ? (
                 <button type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none'>
                   {save?.length} Saved
                 </button>
