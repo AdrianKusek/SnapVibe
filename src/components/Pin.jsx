@@ -107,8 +107,9 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   type='button'
                   className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none'
                   onClick={(e) => {
-                    e.stopPropagation(); // Correct function call with parentheses
                     savePin(_id);        // Call savePin function
+                    e.stopPropagation(); // Correct function call with parentheses
+                   
                   }}
                   
                 >
