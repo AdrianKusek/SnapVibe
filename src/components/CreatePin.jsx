@@ -99,54 +99,7 @@ const CreatePin = ({ user }) => {
       });
   };
 
-  const savePinss = async () => {
-    // Fixed values
-    const title = 'Inspirational quote';
-    const about = 'Quote';
-    const destination = 'www.unsplash.com';
-    const category = 'quotes';
-
-    // Loop through the image paths and handle upload
-    for (const [index, imageUrl] of images.entries()) {
-      try {
-        // Convert image URL to Blob
-        const blob = await fetchImageAsBlob(imageUrl);
-
-        // Upload the image Blob to the server
-        const uploadedImage = await uploadImagee(blob, `car_image_${index + 1}`);
-
-        // Create the pin document
-        const doc = {
-          _type: 'pin',
-          title,
-          about,
-          destination,
-          image: {
-            _type: 'image',
-            asset: {
-              _type: 'reference',
-              _ref: uploadedImage._id,
-            },
-          },
-          userId: user._id, // Assuming `user` is defined globally or passed as a prop
-          postedBy: {
-            _type: 'postedBy',
-            _ref: user._id,
-          },
-          category,
-        };
-
-        // Save the pin document after the image is uploaded
-        await client.create(doc);
-        console.log(`Pin for image ${index + 1} saved successfully.`);
-      } catch (error) {
-        console.error(`Error saving pin for image ${index + 1}:`, error);
-      }
-    }
-
-    // Navigate back to the home page (or another page)
-   
-  };
+ 
 
 
   return (
@@ -259,13 +212,7 @@ const CreatePin = ({ user }) => {
               >
                 Save Pin
               </button>
-              <button
-                type='button'
-                onClick={savePinss}
-                className='bg-blue-500 text-white font-bold p-2 rounded-full w-28 outline-none ml-2'
-              >
-                Populate Pins
-              </button>
+              
             </div>
           </div>
         </div>
