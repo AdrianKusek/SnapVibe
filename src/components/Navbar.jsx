@@ -46,6 +46,7 @@ const Navbar = ({searchTerm, setSearchTerm, user}) => {
                     googleLogout();
                     localStorage.clear(); // Clear local storage
                     navigate('/login'); // Redirect to login page after logout
+                    window.location.reload();
                   }}
                   title="Log out"
                 >
